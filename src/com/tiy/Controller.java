@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -27,8 +28,9 @@ public class Controller implements Initializable{
 	public CheckBox multOp;
 	public CheckBox subOp;
 	public CheckBox addOp;
+	public Button startButton;
 	private Timeline timeLine;
-	private ArrayList<String> operators = new ArrayList<>();
+	private String[] operators = {" + ", " - "};
 
 	private int minutes;
 	private int seconds;
@@ -39,6 +41,14 @@ public class Controller implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		mathExpression.setText("Press Start to begin!");
 		answerBox.setEditable(false);
+		for (String thisOperator: operators) {
+			if(thisOperator.equals(" + ")){
+				addOp.setSelected(true);
+			}
+			if(thisOperator.equals(" - ")){
+				subOp.setSelected(true);
+			}
+		}
 
 	}
 
@@ -49,12 +59,12 @@ public class Controller implements Initializable{
 		if(equation[1].equals("+")){
 			answer=Integer.parseInt(equation[0])+Integer.parseInt(equation[2]);
 
-	}
-// else if(equation[1].equals("-")){
-//			answer=Integer.parseInt(equation[0])-Integer.parseInt(equation[2]);
-//		}else if(equation[1].equals("*")){
-//			answer=Integer.parseInt(equation[0])*Integer.parseInt(equation[2]);
-//		}else if(equation[1].equals("/")){
+		}
+		else if(equation[1].equals("-")){
+			answer=Integer.parseInt(equation[0])-Integer.parseInt(equation[2]);
+		}//else if(equation[1].equals("*")){
+//		answer=Integer.parseInt(equation[0])*Integer.parseInt(equation[2]);
+//		}//else if(equation[1].equals("/")){
 //			answer=Integer.parseInt(equation[0])/Integer.parseInt(equation[2]);
 //		}
 
@@ -72,7 +82,9 @@ public class Controller implements Initializable{
 			wrongLabel.setText(Integer.toString(score.getWrong()));
 		}
 		//TODO get percentages to work right
-		score.setPercentage((score.getCorrect()/(score.getCorrect()+score.getWrong()))*100.00);
+		double total = score.getCorrect()+score.getWrong();
+		System.out.println(total);
+		score.setPercentage((score.getCorrect()/total)*100.00);
 		System.out.println(score.getPercentage());
 		percentageLabel.setText(df.format(score.getPercentage())+" %");
 		equation();
@@ -83,14 +95,27 @@ public class Controller implements Initializable{
 		equation();
 		answerBox.setEditable(true);
 		countDown();
+		startButton.setDisable(true);
 	}
 	private void equation(){
-		String expression= (int)(Math.random()*50)+" + "+ (int)(Math.random()*50);
+		String operator = operators[(int)(Math.random()*operators.length)];
+		int number1 = (int)(Math.random()*50);
+		int number2 = (int)(Math.random()*50);
+		String expression;
+		if(operator.equals(" - ")||operator.equals(" / ")|| operator.equals(" % ")){
+			if(number1 < number2){
+				expression = number2 + operator + number1;
+			}else{
+				expression = number1 + operator + number2;
+			}
+		}else{
+			expression = number1 + operator + number2;
+		}
 		mathExpression.setText(expression);
 	}
 	private void countDown(){
 		minutes = 0;
-		seconds = 60;
+		seconds = 59;
 		milliseconds=1000;
 		timeLine = new Timeline();
 		timeLine.setCycleCount(Timeline.INDEFINITE);
@@ -122,12 +147,17 @@ public class Controller implements Initializable{
 						//TODO get seconds to display 00
 						seconds =0;
 						answerBox.setEditable(false);
+						startButton.setDisable(false);
+						mathExpression.setText("Game Over! \nPress Start to Try Again...");
 						timeLine.stop();
 					}
 					if(seconds<=30){
 						TimerLabel.setStyle("-fx-text-fill: red");
+					}else{
+						TimerLabel.setStyle("-fx-text-fill: #414e5b");
 					}
 				}
+
 			}
 		}));
 		timeLine.playFromStart();
@@ -135,18 +165,11 @@ public class Controller implements Initializable{
 
 //Todo Make work
 	public void addOperator(ActionEvent actionEvent) {
+//		String[] action = actionEvent.getTarget().toString().split("'");
+//		if(action.toString().toLowerCase().equals("multiplication")){
+//			operators[2]=" * ";
+//		}
 
-		if (addOp.isSelected()){
-			operators.add("+");
-		}
-		if (subOp.isSelected()){
-			operators.add("-");
-		}
-		if (multOp.isSelected()){
-			operators.add("*");
-		}
-		if (divisionOp.isSelected()){
-			operators.add("/");
-		}
+
 	}
 }

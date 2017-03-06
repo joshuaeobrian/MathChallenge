@@ -1,25 +1,30 @@
 
 #mainPane{
 	-fx-background-color: #777777;
+	-fx-text-fill: #414e5b;
+	-fx-background-radius: 25px 25px 20px 20px;
 	}
 #scorePane{
 	-fx-background-color: white;
-	-fx-background-radius: 25px;
+	-fx-background-radius: 25px 25px 0 0;
 	}
 #mathPane{
 	-fx-background-color: #c0cdda;
-	-fx-background-radius: 25px;
+	-fx-background-radius: 0 0 0 0;
 	-fx-text-fill: #414e5b;
 	}
 #selectionPane{
 	-fx-background-color: white;
-	-fx-background-radius: 25px;
+	/*-fx-background-radius: 25px;*/
 	}
 
 #mathExpression{
 	-fx-alignment: center;
 	-fx-font-size: 50px;
 	-fx-font-weight: bolder;
+	-fx-text-fill: #414e5b;
+	-fx-wrap-text: true;
+	-fx-text-alignment: center;
 	
 	}
 #answerBox{
@@ -35,19 +40,21 @@
 	-fx-border-radius: 25px;
 	-fx-background-radius: 25px;
 	-fx-background-color: #ffffff;
+	-fx-text-fill: #414e5b;
 	}
 #TimerLabel{
 	-fx-alignment: center;
 	-fx-font-size: 35px;
 	-fx-background-color: white;
-	-fx-background-radius: 20px;
+	-fx-background-radius: 0 0 0 20px;
+	-fx-text-fill: #414e5b;
 	}
 #startButton{
 	-fx-background-color: green;
 	-fx-text-fill: #ffffff;
 	-fx-font-size: 35px;
 	-fx-font-weight: bolder;
-	-fx-background-radius:  20px;
+	-fx-background-radius: 0 0 20px 0;
 	}
 #startButton:hover{
 	-fx-background-color: lawngreen;

@@ -11,6 +11,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("MathChallengeUI.fxml"));
+        primaryStage.setResizable(false);
+
         primaryStage.setTitle("Math Challenge");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
