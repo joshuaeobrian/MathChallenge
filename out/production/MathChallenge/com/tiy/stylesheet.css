@@ -1,0 +1,28 @@
+
+#mainPane{
+	-fx-background-color: #777777;
+	}
+
+#mathExpression{
+	-fx-alignment: center;
+	-fx-font-size: 50px;
+	-fx-font-weight: bold;
+	}
+#answerBox{
+	-fx-alignment: center;
+	-fx-font-size: 50px;
+	-fx-font-weight: bold;
+	}
+#TimerLabel{
+	-fx-alignment: center;
+	-fx-font-size: 35px;
+	}
+#startButton{
+	-fx-background-color: green;
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 35px;
+	-fx-font-weight: bolder;
+	}
+#startButton:hover{
+	-fx-background-color: lawngreen;
+	}
