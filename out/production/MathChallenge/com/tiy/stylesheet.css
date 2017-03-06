@@ -2,26 +2,52 @@
 #mainPane{
 	-fx-background-color: #777777;
 	}
+#scorePane{
+	-fx-background-color: white;
+	-fx-background-radius: 25px;
+	}
+#mathPane{
+	-fx-background-color: #c0cdda;
+	-fx-background-radius: 25px;
+	-fx-text-fill: #414e5b;
+	}
+#selectionPane{
+	-fx-background-color: white;
+	-fx-background-radius: 25px;
+	}
 
 #mathExpression{
 	-fx-alignment: center;
 	-fx-font-size: 50px;
-	-fx-font-weight: bold;
+	-fx-font-weight: bolder;
+	
 	}
 #answerBox{
 	-fx-alignment: center;
 	-fx-font-size: 50px;
 	-fx-font-weight: bold;
+	-webkit-fx-border: solid;
+	-moz-fx-border: solid;
+	-ms-fx-border: solid;
+	-o-fx-border: solid;
+	fx-border: solid;
+	-fx-border-color: #777777;
+	-fx-border-radius: 25px;
+	-fx-background-radius: 25px;
+	-fx-background-color: #ffffff;
 	}
 #TimerLabel{
 	-fx-alignment: center;
 	-fx-font-size: 35px;
+	-fx-background-color: white;
+	-fx-background-radius: 20px;
 	}
 #startButton{
 	-fx-background-color: green;
 	-fx-text-fill: #ffffff;
 	-fx-font-size: 35px;
 	-fx-font-weight: bolder;
+	-fx-background-radius:  20px;
 	}
 #startButton:hover{
 	-fx-background-color: lawngreen;

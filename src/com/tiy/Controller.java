@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.sql.Time;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -35,12 +37,9 @@ public class Controller implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		equation();
+		mathExpression.setText("Press Start to begin!");
 		answerBox.setEditable(false);
-		subOp.setVisible(false);
-		addOp.setVisible(false);
-		multOp.setVisible(false);
-		divisionOp.setVisible(false);
+
 	}
 
 	public void submit(ActionEvent actionEvent) {
@@ -64,6 +63,7 @@ public class Controller implements Initializable{
 
 	}
 	private void checkAnswer(int Answer,int userAnswer){
+		DecimalFormat df = new DecimalFormat("#00");
 		if(Answer == userAnswer){
 			score.setCorrect(score.getCorrect()+1);
 			correctLabel.setText(Integer.toString(score.getCorrect()));
@@ -71,11 +71,16 @@ public class Controller implements Initializable{
 			score.setWrong(score.getWrong()+1);
 			wrongLabel.setText(Integer.toString(score.getWrong()));
 		}
+		//TODO get percentages to work right
+		score.setPercentage((score.getCorrect()/(score.getCorrect()+score.getWrong()))*100.00);
+		System.out.println(score.getPercentage());
+		percentageLabel.setText(df.format(score.getPercentage())+" %");
 		equation();
 		answerBox.clear();
 	}
 
 	public void Start(ActionEvent actionEvent) {
+		equation();
 		answerBox.setEditable(true);
 		countDown();
 	}
@@ -84,7 +89,7 @@ public class Controller implements Initializable{
 		mathExpression.setText(expression);
 	}
 	private void countDown(){
-		minutes = 2;
+		minutes = 0;
 		seconds = 60;
 		milliseconds=1000;
 		timeLine = new Timeline();
@@ -114,7 +119,13 @@ public class Controller implements Initializable{
 				if(minutes<= 0){
 					if(seconds<=0){
 						if(milliseconds <= 0);
+						//TODO get seconds to display 00
+						seconds =0;
+						answerBox.setEditable(false);
 						timeLine.stop();
+					}
+					if(seconds<=30){
+						TimerLabel.setStyle("-fx-text-fill: red");
 					}
 				}
 			}
@@ -123,7 +134,7 @@ public class Controller implements Initializable{
 	}
 
 //Todo Make work
-	public void addOperater(ActionEvent actionEvent) {
+	public void addOperator(ActionEvent actionEvent) {
 
 		if (addOp.isSelected()){
 			operators.add("+");
